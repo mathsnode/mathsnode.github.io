@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="MathsNode logo">
+  <rect width="160" height="160" rx="32" fill="#2563EB"/>
+  <path d="M40 116L80 44L120 116" stroke="white" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="80" cy="92" r="10" fill="white"/>
+  <path d="M60 116H100" stroke="white" stroke-width="10" stroke-linecap="round"/>
+</svg>
