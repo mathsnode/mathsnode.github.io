@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { BlockMath, InlineMath } from 'react-katex';
+import { InlineMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import { getLessonBySlug } from '../lib/content';
 import { loadProgress, saveProgress } from '../lib/progress';
@@ -10,15 +10,22 @@ function renderInlineMathSegments(text: string) {
   return parts.map((part, index) => {
     if (part.startsWith('$') && part.endsWith('$')) {
       const expression = part.slice(1, -1);
-      return <InlineMath key={`${expression}-${index}`} math={expression} />;
+      return <span key={`${expression}-${index}`} className="katex-inline"><InlineMath math={expression} /></span>;
     }
     return <span key={`${part}-${index}`}>{part}</span>;
   });
 }
 
-function renderLessonContent(content: string) {
-  const sections = content.split(/\n\n/).filter(Boolean);
+export function renderLessonContent(content: string) {
+  const sections = content
+    .split(/\n{2,}/)
+    .map((section) => section.trim())
+    .filter(Boolean);
+
   return sections.map((section, sectionIndex) => {
+    if (section.startsWith('## ')) {
+      return <h2 key={sectionIndex} className="mt-8 text-2xl font-semibold">{section.replace('## ', '')}</h2>;
+    }
     if (section.startsWith('### ')) {
       return <h3 key={sectionIndex} className="mt-6 text-xl font-semibold">{section.replace('### ', '')}</h3>;
     }
@@ -31,13 +38,10 @@ function renderLessonContent(content: string) {
     }
     if (section.startsWith('$$')) {
       const math = section.replace(/^\$\$/, '').replace(/\$\$/, '');
-      return <BlockMath key={sectionIndex} math={math} />;
+      return <div key={sectionIndex} className="katex-block"><InlineMath math={math} /></div>;
     }
-    if (section.startsWith('## ')) {
-      return <h2 key={sectionIndex} className="mt-8 text-2xl font-semibold">{section.replace('## ', '')}</h2>;
-    }
-    if (section.startsWith('### Worked example')) {
-      return <div key={sectionIndex} className="rounded-2xl bg-slate-100 p-4 dark:bg-slate-800"><p className="font-semibold">Worked example</p><p className="mt-2">{renderInlineMathSegments(section.replace('### Worked example', ''))}</p></div>;
+    if (section.includes('Worked example')) {
+      return <div key={sectionIndex} className="rounded-2xl bg-slate-100 p-4 dark:bg-slate-800"><p className="font-semibold">Worked example</p><p className="mt-2">{renderInlineMathSegments(section.replace('### Worked example', '').trim())}</p></div>;
     }
     return <p key={sectionIndex} className="leading-8">{renderInlineMathSegments(section)}</p>;
   });
