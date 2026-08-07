@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+::selection {
+  background: #bfdbfe;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.prose ul {
+  margin: 1rem 0 1rem 1.25rem;
+  list-style: disc;
+}
+
+.prose ol {
+  margin: 1rem 0 1rem 1.25rem;
+  list-style: decimal;
+}
+
+.prose code {
+  background: rgba(37, 99, 235, 0.1);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
