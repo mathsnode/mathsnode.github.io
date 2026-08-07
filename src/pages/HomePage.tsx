@@ -41,17 +41,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-3">
+      <section className="grid gap-6 lg:grid-cols-3">
         {[
-          { title: 'Understand it', text: 'Every lesson builds from principles before procedures.' },
-          { title: 'Build it', text: 'We connect definitions, structures and examples to actual methods.' },
-          { title: 'Practise it', text: 'Questions are grouped around warm-up, core, developing and challenge work.' }
+          { title: 'Foundational understanding', text: 'Every lesson starts with definitions, examples and core ideas before procedures.' },
+          { title: 'Course pathways', text: 'Foundations, National 4, National 5 and Higher are all linked into one clear progression.' },
+          { title: 'Structured practice', text: 'Each topic includes warm-up, core, developing and challenge-style questions.' }
         ].map((card) => (
           <div key={card.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <h3 className="text-lg font-semibold">{card.title}</h3>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{card.text}</p>
           </div>
         ))}
+      </section>
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <h2 className="text-2xl font-semibold">What you can study now</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {[
+            'Mathematical language and logic',
+            'Natural numbers and successor',
+            'Fractions, decimals and percentages',
+            'Linear relationships',
+            'Quadratics and factorising',
+            'Differentiation from first principles'
+          ].map((topic) => (
+            <div key={topic} className="rounded-2xl border border-slate-200 p-4 text-sm text-slate-600 dark:border-slate-700 dark:text-slate-300">{topic}</div>
+          ))}
+        </div>
       </section>
     </div>
   );
